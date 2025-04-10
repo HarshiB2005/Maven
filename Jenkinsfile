@@ -6,8 +6,7 @@ maven 'Maven' // Ensure this matches the name configured in Jenkins
 stages {
 stage('Checkout') {
 steps {
-git branch: 'master', url:
-'https://github.com/Hemavathipcse/MyMavenJenkinsPipeline.git'
+git branch: 'master', url:'https://github.com/HarshiB2005/Maven.git'
 }
 }
 stage('Build') {
@@ -23,7 +22,7 @@ sh 'mvn test' // Run unit tests
 stage('Run Application') {
 steps {
 // Start the JAR application
-sh 'java -jar target/MyMavenJenkinsPipeline-1.0-SNAPSHOT.jar'
+sh 'java -jar target/MaavenPrac-1.0-SNAPSHOT.jar'
 }
 }
 }

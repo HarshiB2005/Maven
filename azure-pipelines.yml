@@ -1,34 +1,18 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
 trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: Default
 
 steps:
-- script: echo "Starting Azure Pipeline for Maven Project"
-  displayName: 'Initialize pipeline'
-
-# Maven build step
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'clean package'
-  displayName: 'Build with Maven'
-
-# Show contents of the target folder
-- script: ls -l target
-  displayName: 'List contents of target/ folder'
-
-# Run the generated JAR file
-- script: |
-    echo "Running the generated JAR file..."
-    JAR_FILE=$(find target -name "*.jar" | head -n 1)
-    echo "Detected JAR file: $JAR_FILE"
-    java -jar "$JAR_FILE"
-  displayName: ' Run JAR'
+- script: echo Myfirst Azure Pipeline for maven project
+  displayName: 'Run a one-line script'
+- script: mvn clean install
+  displayName: 'Build with maven'
+- script: java -jar target/SimpleMavenApp-1.0-SNAPSHOT.jar
+  displayName: 'Running jar'
